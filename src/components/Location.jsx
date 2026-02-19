@@ -15,14 +15,14 @@ export default function Location() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.lf').forEach((el) => {
-        gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 87%' } })
+        gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 87%' } })
       })
 
       // Big image reveal — expands from center
       if (bigImg.current) {
         gsap.fromTo(bigImg.current,
           { clipPath: 'inset(30% 20% 30% 20%)' },
-          { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'expo.out', scrollTrigger: { trigger: bigImg.current, start: 'top 75%' } }
+          { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.65, ease: 'expo.out', scrollTrigger: { trigger: bigImg.current, start: 'top 75%' } }
         )
       }
 
@@ -30,12 +30,12 @@ export default function Location() {
       if (floatText.current) {
         gsap.to(floatText.current, {
           x: '15%', ease: 'none',
-          scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 2 },
+          scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
         })
       }
 
       gsap.utils.toArray('.l-img').forEach((el) => {
-        gsap.fromTo(el, { y: 60, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%' } })
+        gsap.fromTo(el, { y: 60, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%' } })
       })
     }, ref.current)
     return () => ctx.revert()

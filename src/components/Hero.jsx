@@ -17,16 +17,16 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(img.current, { scale: 1.4 }, { scale: 1, duration: 1.5, ease: 'expo.out', delay: 0.1 })
-      gsap.fromTo(ov.current, { opacity: 1 }, { opacity: 0.5, duration: 1.2, ease: 'power2.out', delay: 0.1 })
+      gsap.fromTo(img.current, { scale: 1.4 }, { scale: 1, duration: 1, ease: 'expo.out', delay: 0.05 })
+      gsap.fromTo(ov.current, { opacity: 1 }, { opacity: 0.5, duration: 0.8, ease: 'power2.out', delay: 0.05 })
 
       const w = h1.current?.querySelectorAll('.hw')
-      if (w) gsap.fromTo(w, { y: '130%', rotate: 3 }, { y: '0%', rotate: 0, duration: 0.8, stagger: 0.07, ease: 'expo.out', delay: 0.3 })
+      if (w) gsap.fromTo(w, { y: '130%', rotate: 3 }, { y: '0%', rotate: 0, duration: 0.55, stagger: 0.05, ease: 'expo.out', delay: 0.15 })
 
-      gsap.fromTo(sub.current, { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: 0.8 })
-      gsap.fromTo(cta.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 1.1 })
-      gsap.fromTo(tag.current, { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1 })
-      gsap.fromTo(bigNum.current, { opacity: 0, x: 50 }, { opacity: 0.06, x: 0, duration: 1, ease: 'power2.out', delay: 0.6 })
+      gsap.fromTo(sub.current, { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'power3.out', delay: 0.5 })
+      gsap.fromTo(cta.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out', delay: 0.7 })
+      gsap.fromTo(tag.current, { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.6 })
+      gsap.fromTo(bigNum.current, { opacity: 0, x: 50 }, { opacity: 0.06, x: 0, duration: 0.7, ease: 'power2.out', delay: 0.3 })
 
       gsap.to(img.current, {
         y: '30%', ease: 'none',
@@ -62,7 +62,7 @@ export default function Hero() {
 
       {/* Headline - bottom left, huge, breaking edges */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="pl-6 pr-4 md:pl-16 md:pr-8 pb-[12vh]">
+        <div className="pl-6 pr-4 md:pl-16 md:pr-8 pb-[4vh]">
           <h1 ref={h1} className="display-xxl text-white" style={{ maxWidth: '90vw' }}>
             <span className="block overflow-hidden">
               <span className="hw inline-block">Il tuo</span>
@@ -77,7 +77,7 @@ export default function Hero() {
         </div>
 
         {/* Sub + CTA band - overlaps into next section */}
-        <div className="relative z-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8 px-6 md:px-16 pb-8" style={{ marginBottom: '-6vh' }}>
+        <div className="relative z-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8 px-6 md:px-16 pb-6">
           <div ref={sub} className="max-w-sm">
             <p style={{ fontSize: 'clamp(0.85rem, 1vw, 1rem)', lineHeight: 1.7, fontWeight: 300, color: 'rgba(255,255,255,0.5)' }}>
               Ristorante, pizzeria e cocktail bar.<br />

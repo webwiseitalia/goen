@@ -14,23 +14,23 @@ export default function About() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.af').forEach((el) => {
-        gsap.fromTo(el, { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } })
+        gsap.fromTo(el, { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } })
       })
       gsap.utils.toArray('.a-img').forEach((el, i) => {
         const dirs = ['inset(100% 0 0 0)', 'inset(0 100% 0 0)', 'inset(0 0 100% 0)']
-        gsap.fromTo(el, { clipPath: dirs[i % 3], scale: 1.1 }, { clipPath: 'inset(0 0 0 0)', scale: 1, duration: 0.8, ease: 'power3.inOut', scrollTrigger: { trigger: el, start: 'top 82%' } })
+        gsap.fromTo(el, { clipPath: dirs[i % 3], scale: 1.1 }, { clipPath: 'inset(0 0 0 0)', scale: 1, duration: 0.55, ease: 'power3.inOut', scrollTrigger: { trigger: el, start: 'top 82%' } })
       })
       // Big text parallax
       if (bigTextRef.current) {
         gsap.to(bigTextRef.current, {
           x: '-10%', ease: 'none',
-          scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 1.5 },
+          scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 0.8 },
         })
       }
       // Counter
       gsap.utils.toArray('.cn').forEach((el) => {
         const v = parseInt(el.dataset.v)
-        gsap.fromTo(el, { textContent: 0 }, { textContent: v, duration: 1.2, ease: 'power2.out', snap: { textContent: 1 }, scrollTrigger: { trigger: el, start: 'top 88%' } })
+        gsap.fromTo(el, { textContent: 0 }, { textContent: v, duration: 0.8, ease: 'power2.out', snap: { textContent: 1 }, scrollTrigger: { trigger: el, start: 'top 88%' } })
       })
     }, ref.current)
     return () => ctx.revert()

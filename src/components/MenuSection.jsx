@@ -24,7 +24,7 @@ export default function MenuSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.mf').forEach((el) => {
-        gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 87%' } })
+        gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 87%' } })
       })
     }, ref.current)
     return () => ctx.revert()
@@ -32,7 +32,7 @@ export default function MenuSection() {
 
   useEffect(() => {
     if (imgRef.current) {
-      gsap.fromTo(imgRef.current, { scale: 1.15, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'power3.out' })
+      gsap.fromTo(imgRef.current, { scale: 1.15, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: 'power3.out' })
     }
   }, [active])
 

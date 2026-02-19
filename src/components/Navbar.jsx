@@ -1,127 +1,96 @@
-import { useState, useEffect } from 'react'
-import { Menu, X, Phone } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import gsap from 'gsap'
 import logo from '../assets/logogoen-Photoroom.webp'
 
-const navLinks = [
-  { label: 'Home', href: '#hero' },
+const links = [
   { label: 'Chi Siamo', href: '#chi-siamo' },
-  { label: 'Menu', href: '#menu' },
+  { label: 'Cucina', href: '#menu' },
   { label: 'Location', href: '#location' },
   { label: 'Eventi', href: '#eventi' },
-  { label: 'Cocktail Bar', href: '#cocktail' },
   { label: 'Galleria', href: '#galleria' },
   { label: 'Contatti', href: '#contatti' },
 ]
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const lastY = useRef(0)
+  const navRef = useRef(null)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => {
+      const y = window.scrollY
+      setHidden(y > 200 && y > lastY.current)
+      setScrolled(y > 100)
+      lastY.current = y
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (!navRef.current) return
+    gsap.fromTo(navRef.current.children,
+      { y: -30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: 'power3.out', delay: 0.5 }
+    )
   }, [])
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-lg py-2'
-            : 'bg-gradient-to-b from-black/50 to-transparent py-4'
-        }`}
+        ref={navRef}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-700"
+        style={{
+          transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
+          background: scrolled ? 'rgba(245,240,232,0.92)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(20px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(0,0,0,0.06)' : 'none',
+        }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <a href="#hero" className="flex-shrink-0">
-              <img
-                src={logo}
-                alt="Goen Ristorante Pisogne"
-                className={`transition-all duration-500 ${
-                  scrolled ? 'h-12 brightness-100' : 'h-14 brightness-0 invert'
-                }`}
-              />
+        <div className="flex items-center justify-between px-6 md:px-12 py-5">
+          <a href="#hero" className="relative z-10">
+            <img src={logo} alt="Goen" className="h-10 md:h-12 transition-all duration-500" style={{ filter: scrolled ? 'none' : 'brightness(0) invert(1)' }} />
+          </a>
+          <div className="hidden lg:flex items-center gap-10">
+            {links.map((l) => (
+              <a key={l.href} href={l.href} className="label-sm transition-colors duration-300 relative group" style={{ color: scrolled ? 'var(--text)' : '#fff' }}>
+                {l.label}
+                <span className="absolute -bottom-1 left-0 h-px bg-current transition-all duration-500 w-0 group-hover:w-full" />
+              </a>
+            ))}
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="#contatti" className="hidden lg:block label-sm px-6 py-3 border transition-all duration-300 hover:bg-[var(--navy)] hover:text-white hover:border-[var(--navy)]" style={{ color: scrolled ? 'var(--navy)' : '#fff', borderColor: scrolled ? 'var(--navy)' : 'rgba(255,255,255,0.4)' }}>
+              Prenota
             </a>
-
-            <div className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-300 ${
-                    scrolled
-                      ? 'text-navy-700 hover:text-gold-600 hover:bg-navy-50'
-                      : 'text-white/90 hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="#contatti"
-                className="ml-3 btn-primary !py-2.5 !px-6 !text-xs"
-              >
-                Prenota
-              </a>
-            </div>
-
-            <div className="flex items-center gap-3 lg:hidden">
-              <a
-                href="tel:+390364 87229"
-                className={`p-2 rounded-full transition-colors ${
-                  scrolled ? 'text-navy-700 hover:bg-navy-50' : 'text-white hover:bg-white/10'
-                }`}
-              >
-                <Phone size={20} />
-              </a>
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className={`p-2 rounded-lg transition-colors ${
-                  scrolled ? 'text-navy-700 hover:bg-navy-50' : 'text-white hover:bg-white/10'
-                }`}
-              >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
+            <button onClick={() => setOpen(!open)} className="lg:hidden flex flex-col gap-1.5 w-7 relative z-50" aria-label="Menu">
+              <motion.span animate={open ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }} className="block h-px w-full origin-center" style={{ background: open ? 'var(--navy)' : scrolled ? 'var(--navy)' : '#fff' }} />
+              <motion.span animate={open ? { opacity: 0, x: 10 } : { opacity: 1, x: 0 }} className="block h-px w-5 origin-center" style={{ background: open ? 'var(--navy)' : scrolled ? 'var(--navy)' : '#fff' }} />
+              <motion.span animate={open ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }} className="block h-px w-full origin-center" style={{ background: open ? 'var(--navy)' : scrolled ? 'var(--navy)' : '#fff' }} />
+            </button>
           </div>
         </div>
       </nav>
-
-      {isOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
-          <div className="absolute top-0 right-0 w-80 max-w-[85vw] h-full bg-white shadow-2xl">
-            <div className="flex items-center justify-between p-6 border-b border-gray-100">
-              <img src={logo} alt="Goen" className="h-10" />
-              <button onClick={() => setIsOpen(false)} className="p-2 text-navy-700 hover:bg-navy-50 rounded-lg">
-                <X size={24} />
-              </button>
-            </div>
-            <div className="py-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block px-6 py-3.5 text-navy-700 hover:bg-navy-50 hover:text-gold-600 font-medium transition-colors"
-                >
-                  {link.label}
-                </a>
+      <AnimatePresence>
+        {open && (
+          <motion.div initial={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }} animate={{ clipPath: 'circle(150% at calc(100% - 40px) 40px)' }} exit={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }} transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }} className="fixed inset-0 z-40 flex flex-col justify-end pb-20 px-8" style={{ background: 'var(--cream)' }}>
+            <div className="space-y-2">
+              {links.map((l, i) => (
+                <motion.div key={l.href} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 + i * 0.08, duration: 0.6, ease: [0.76, 0, 0.24, 1] }}>
+                  <a href={l.href} onClick={() => setOpen(false)} className="block py-2" style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)', fontSize: '2rem' }}>{l.label}</a>
+                </motion.div>
               ))}
-              <div className="px-6 pt-4">
-                <a
-                  href="#contatti"
-                  onClick={() => setIsOpen(false)}
-                  className="btn-primary w-full text-center"
-                >
-                  Prenota un tavolo
-                </a>
-              </div>
             </div>
-          </div>
-        </div>
-      )}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="mt-12 flex gap-8">
+              <a href="tel:+39036487229" className="label-sm" style={{ color: 'var(--text-muted)' }}>+39 0364 87229</a>
+              <a href="https://www.instagram.com/goenristorante/" target="_blank" rel="noopener noreferrer" className="label-sm" style={{ color: 'var(--text-muted)' }}>Instagram</a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

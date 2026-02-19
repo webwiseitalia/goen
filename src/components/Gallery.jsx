@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { X, Instagram } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import foto1 from '../assets/foto/foto-1.webp'
 import foto2 from '../assets/foto/foto-2.webp'
 import foto3 from '../assets/foto/foto-3.webp'
@@ -12,98 +13,98 @@ import foto9 from '../assets/foto/foto-9.webp'
 import foto10 from '../assets/foto/foto-10.webp'
 import foto11 from '../assets/foto/foto-11.webp'
 
+gsap.registerPlugin(ScrollTrigger)
+
 const images = [
-  { src: foto9, alt: 'Vista lago con fiori dalla terrazza', category: 'Location' },
-  { src: foto6, alt: 'Grigliata di pesce fresco', category: 'Piatti' },
-  { src: foto1, alt: 'Vista esterna del ristorante Goen', category: 'Location' },
-  { src: foto3, alt: 'Pasta fresca con capesante', category: 'Piatti' },
-  { src: foto8, alt: 'Calici di vino con vista porto', category: 'Location' },
-  { src: foto11, alt: 'Sala interna con camino', category: 'Ambiente' },
-  { src: foto7, alt: 'Fritto misto di calamari', category: 'Piatti' },
-  { src: foto2, alt: 'Piatto di dessert assortiti', category: 'Piatti' },
-  { src: foto10, alt: 'Sala interna elegante', category: 'Ambiente' },
-  { src: foto4, alt: 'Cialda con fragole fresche', category: 'Piatti' },
-  { src: foto5, alt: 'Tortino al cioccolato', category: 'Piatti' },
+  { src: foto9, alt: 'Vista lago', tall: true },
+  { src: foto6, alt: 'Grigliata di pesce', tall: false },
+  { src: foto1, alt: 'Esterno ristorante', tall: false },
+  { src: foto3, alt: 'Pasta con capesante', tall: true },
+  { src: foto8, alt: 'Calici al tramonto', tall: false },
+  { src: foto11, alt: 'Sala con camino', tall: true },
+  { src: foto7, alt: 'Fritto misto', tall: false },
+  { src: foto2, alt: 'Dessert', tall: false },
+  { src: foto10, alt: 'Sala elegante', tall: true },
+  { src: foto4, alt: 'Cialda fragole', tall: false },
+  { src: foto5, alt: 'Tortino cioccolato', tall: false },
 ]
 
-const categories = ['Tutti', 'Location', 'Piatti', 'Ambiente']
-
 export default function Gallery() {
-  const [filter, setFilter] = useState('Tutti')
   const [lightbox, setLightbox] = useState(null)
+  const ref = useRef(null)
 
-  const filtered = filter === 'Tutti' ? images : images.filter((img) => img.category === filter)
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray('.gal-item').forEach((el, i) => {
+        gsap.fromTo(el,
+          { y: 60 + (i % 3) * 20, opacity: 0, scale: 0.97 },
+          {
+            y: 0, opacity: 1, scale: 1,
+            duration: 1 + (i % 3) * 0.2,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 90%' },
+          }
+        )
+      })
+    }, ref.current)
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <section id="galleria" className="section-padding bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10">
-          <span className="text-gold-500 font-semibold uppercase tracking-wider text-sm">Galleria</span>
-          <h2 className="section-title mt-2">I Nostri Scatti</h2>
+    <section id="galleria" ref={ref} style={{ background: 'var(--navy)' }}>
+      <div className="px-6 md:px-12 lg:px-20 py-[var(--space-xl)]">
+        {/* Header */}
+        <div className="grid grid-cols-12 mb-12 md:mb-20">
+          <div className="col-span-12 md:col-span-8 md:col-start-5 text-right">
+            <div className="flex items-center gap-4 justify-end mb-4">
+              <span className="label-sm" style={{ color: 'var(--gold)' }}>Galleria</span>
+              <span className="editorial-divider" />
+            </div>
+            <h2 className="display-lg text-white">
+              I nostri <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>scatti</em>
+            </h2>
+          </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                filter === cat
-                  ? 'bg-navy-700 text-white shadow-lg'
-                  : 'bg-navy-50 text-navy-600 hover:bg-navy-100'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className="columns-2 md:columns-3 gap-4 space-y-4">
-          {filtered.map((img, i) => (
+        {/* Irregular masonry - three columns with different heights */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {images.map((img, i) => (
             <div
               key={i}
-              className="break-inside-avoid rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer group"
+              className={`gal-item overflow-hidden cursor-pointer group ${img.tall ? 'row-span-2' : ''}`}
               onClick={() => setLightbox(img)}
+              style={{ aspectRatio: img.tall ? '3/5' : '4/3' }}
             >
               <img
                 src={img.src}
                 alt={img.alt}
-                className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-10">
+        {/* Instagram CTA */}
+        <div className="mt-16 text-center">
           <a
             href="https://www.instagram.com/goenristorante/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white font-semibold rounded-full hover:shadow-lg transition-shadow text-sm uppercase tracking-wider"
+            className="label-sm text-white/40 hover:text-white transition-colors duration-300 inline-flex items-center gap-3"
           >
-            <Instagram size={18} />
-            Seguici su Instagram
+            <span className="w-8 h-px bg-white/30" />
+            @goenristorante su Instagram
+            <span className="w-8 h-px bg-white/30" />
           </a>
         </div>
       </div>
 
+      {/* Lightbox */}
       {lightbox && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setLightbox(null)}
-        >
-          <button
-            onClick={() => setLightbox(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white p-2"
-          >
-            <X size={28} />
-          </button>
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
-            className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
-          />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 cursor-pointer" style={{ background: 'rgba(10,15,26,0.95)' }} onClick={() => setLightbox(null)}>
+          <img src={lightbox.src} alt={lightbox.alt} className="max-w-full max-h-[85vh] object-contain" />
+          <button onClick={() => setLightbox(null)} className="absolute top-6 right-6 label-sm text-white/50 hover:text-white transition-colors">Chiudi</button>
         </div>
       )}
     </section>

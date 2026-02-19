@@ -1,123 +1,67 @@
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, ArrowUp } from 'lucide-react'
 import logo from '../assets/logogoen-Photoroom.webp'
-
-const quickLinks = [
-  { label: 'Menu', href: '#menu' },
-  { label: 'Prenota', href: '#contatti' },
-  { label: 'Eventi', href: '#eventi' },
-  { label: 'Gallery', href: '#galleria' },
-]
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-700 text-white">
-      <div className="max-w-7xl mx-auto section-padding !pb-8">
-        <div className="text-center mb-12 pb-12 border-b border-white/10">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
-            Prenota il tuo tavolo <span className="text-gold-400">vista lago</span>
-          </h2>
-          <p className="text-white/60 mb-6 max-w-xl mx-auto">
-            Un'esperienza unica tra sapori autentici e panorami mozzafiato sul Lago d'Iseo.
-          </p>
-          <a href="#contatti" className="btn-primary">
-            Prenota ora
-          </a>
+    <footer style={{ background: 'var(--navy)' }}>
+      {/* Big CTA */}
+      <div className="px-6 md:px-12 lg:px-20 pt-[var(--space-xl)] pb-[var(--space-lg)] border-b border-white/5">
+        <div className="grid grid-cols-12 items-end">
+          <div className="col-span-12 lg:col-span-8">
+            <p className="label-sm mb-4" style={{ color: 'var(--gold)' }}>Cosa aspetti?</p>
+            <h2 className="display-lg text-white">
+              Prenota il tuo<br />tavolo <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>vista lago</em>
+            </h2>
+          </div>
+          <div className="col-span-12 lg:col-span-4 mt-8 lg:mt-0 lg:text-right">
+            <a href="#contatti" className="label-sm inline-block px-10 py-4 transition-all duration-500 hover:bg-white hover:text-[var(--navy)]" style={{ background: 'var(--gold)', color: 'var(--navy)' }}>
+              Prenota ora
+            </a>
+          </div>
         </div>
+      </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <div>
-            <img src={logo} alt="Goen Pisogne" className="h-14 brightness-0 invert mb-4" />
-            <p className="text-white/60 text-sm leading-relaxed">
-              Ristorante, pizzeria e cocktail bar affacciato sul porto di Pisogne, Lago d'Iseo. Dal 2015.
+      {/* Footer grid - irregular */}
+      <div className="px-6 md:px-12 lg:px-20 py-16">
+        <div className="grid grid-cols-12 gap-8 md:gap-12">
+          <div className="col-span-12 md:col-span-3">
+            <img src={logo} alt="Goen" className="h-12 brightness-0 invert mb-6" />
+            <p className="text-white/30" style={{ fontSize: '0.8rem', lineHeight: 1.7 }}>
+              Ristorante, pizzeria e cocktail bar sul porto di Pisogne. Dal 2015.
             </p>
           </div>
 
-          <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-gold-400">Contatti</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2 text-white/70">
-                <MapPin size={16} className="mt-0.5 flex-shrink-0" />
-                <span>Corso Giuseppe Zanardelli, 15<br />25055 Pisogne (BS)</span>
-              </li>
-              <li>
-                <a href="tel:+390364 87229" className="flex items-center gap-2 text-white/70 hover:text-gold-400 transition-colors">
-                  <Phone size={16} />
-                  +39 0364 87229
-                </a>
-              </li>
-              <li>
-                <a href="mailto:goenristorantepisogne@gmail.com" className="flex items-center gap-2 text-white/70 hover:text-gold-400 transition-colors">
-                  <Mail size={16} />
-                  goenristorantepisogne@gmail.com
-                </a>
-              </li>
-            </ul>
+          <div className="col-span-6 md:col-span-2 md:col-start-5">
+            <span className="label-sm block mb-4" style={{ color: 'var(--gold)' }}>Navigazione</span>
+            {['Menu', 'Location', 'Eventi', 'Galleria', 'Prenota'].map((l) => (
+              <a key={l} href={`#${l === 'Prenota' ? 'contatti' : l === 'Menu' ? 'menu' : l.toLowerCase()}`} className="block text-white/30 hover:text-white transition-colors mb-2" style={{ fontSize: '0.85rem' }}>
+                {l}
+              </a>
+            ))}
           </div>
 
-          <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-gold-400">Orari</h4>
-            <ul className="space-y-2 text-sm text-white/70">
-              <li className="flex items-center gap-2">
-                <Clock size={16} />
-                Pranzo e Cena
-              </li>
-              <li className="text-red-300 font-medium ml-6">Chiuso il Mercoledì</li>
-            </ul>
-
-            <h4 className="font-semibold text-sm uppercase tracking-wider mt-6 mb-4 text-gold-400">Link Rapidi</h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-sm text-white/70 hover:text-gold-400 transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="col-span-6 md:col-span-2">
+            <span className="label-sm block mb-4" style={{ color: 'var(--gold)' }}>Contatti</span>
+            <p className="text-white/30 mb-2" style={{ fontSize: '0.85rem' }}>Corso G. Zanardelli, 15</p>
+            <p className="text-white/30 mb-2" style={{ fontSize: '0.85rem' }}>25055 Pisogne (BS)</p>
+            <a href="tel:+39036487229" className="block text-white/30 hover:text-white transition-colors mb-2" style={{ fontSize: '0.85rem' }}>+39 0364 87229</a>
+            <p className="text-white/30 mt-4 mb-1" style={{ fontSize: '0.85rem' }}>Pranzo e Cena</p>
+            <p style={{ fontSize: '0.85rem', color: '#b44' }}>Chiuso il Mercoledì</p>
           </div>
 
-          <div>
-            <h4 className="font-semibold text-sm uppercase tracking-wider mb-4 text-gold-400">Seguici</h4>
-            <div className="flex gap-3">
-              <a
-                href="https://www.instagram.com/goenristorante/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram size={20} />
-              </a>
-              <a
-                href="https://www.facebook.com/GoenRistorantePizzeria"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} />
-              </a>
-            </div>
-            <div className="mt-6 text-sm text-white/50">
-              <p>goenpisogne.it</p>
-              <p>goenristorante.it</p>
-            </div>
+          <div className="col-span-12 md:col-span-2 md:col-start-11">
+            <span className="label-sm block mb-4" style={{ color: 'var(--gold)' }}>Social</span>
+            <a href="https://www.instagram.com/goenristorante/" target="_blank" rel="noopener noreferrer" className="block text-white/30 hover:text-white transition-colors mb-2" style={{ fontSize: '0.85rem' }}>Instagram</a>
+            <a href="https://www.facebook.com/GoenRistorantePizzeria" target="_blank" rel="noopener noreferrer" className="block text-white/30 hover:text-white transition-colors mb-2" style={{ fontSize: '0.85rem' }}>Facebook</a>
           </div>
         </div>
+      </div>
 
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-white/40 text-center md:text-left">
-            <p>© 2025 Goen Ristorante Pizzeria — Pisogne (BS)</p>
-            <p className="mt-1">P.IVA: 04528650981</p>
-          </div>
-          <a
-            href="#hero"
-            className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-            aria-label="Torna in cima"
-          >
-            <ArrowUp size={18} />
-          </a>
-        </div>
+      {/* Bottom bar */}
+      <div className="px-6 md:px-12 lg:px-20 py-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <span className="text-white/20" style={{ fontSize: '0.7rem' }}>
+          © 2025 Goen Ristorante Pizzeria — Pisogne (BS) · P.IVA 04528650981
+        </span>
+        <a href="#hero" className="label-sm text-white/20 hover:text-white/60 transition-colors">↑ Torna su</a>
       </div>
     </footer>
   )

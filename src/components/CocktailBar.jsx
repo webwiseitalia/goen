@@ -30,7 +30,7 @@ export default function CocktailBar() {
     <section id="cocktail" ref={ref} className="relative overflow-hidden" style={{ background: 'var(--navy)', minHeight: '110vh' }}>
       {/* Parallax BG */}
       <div className="absolute inset-0 overflow-hidden">
-        <img ref={imgRef} src={wineImg} alt="Calici di vino al tramonto" className="w-[110%] h-[140%] object-cover will-change-transform" style={{ marginTop: '-20%', marginLeft: '-5%' }} />
+        <img ref={imgRef} src={wineImg} alt="Calici di vino al tramonto" title="Cocktail bar con vista tramonto sul Lago d'Iseo" loading="lazy" width={1920} height={1080} className="w-[110%] h-[140%] object-cover will-change-transform" style={{ marginTop: '-20%', marginLeft: '-5%' }} />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(200deg, rgba(10,15,26,0.92) 0%, rgba(10,15,26,0.5) 40%, rgba(10,15,26,0.95) 100%)' }} />
       </div>
 

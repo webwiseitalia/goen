@@ -37,7 +37,7 @@ export default function Contact() {
     <section id="contatti" ref={ref} className="relative" style={{ background: 'var(--cream)' }}>
       {/* Background image — 40% height, bleeds at top */}
       <div className="relative w-full overflow-hidden" style={{ height: '45vh' }}>
-        <img src={terraceImg} alt="Terrazza" className="w-full h-full object-cover" style={{ objectPosition: '50% 70%' }} />
+        <img src={terraceImg} alt="Terrazza" title="Terrazza del Ristorante Goen al tramonto" loading="lazy" width={1920} height={1080} className="w-full h-full object-cover" style={{ objectPosition: '50% 70%' }} />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 30%, var(--cream) 100%)' }} />
         {/* Floating headline overlapping image */}
         <div className="absolute bottom-0 left-0 right-0 z-10 px-6 md:px-16" style={{ transform: 'translateY(40%)' }}>

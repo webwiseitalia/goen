@@ -1,0 +1,30 @@
+export const SITE = {
+  name: 'Goen Ristorante Pizzeria',
+  shortName: 'Goen',
+  tagline: 'Ristorante, pizzeria e cocktail bar sul Lago d\'Iseo',
+  description: 'Ristorante, pizzeria e cocktail bar sul porto di Pisogne, Lago d\'Iseo. Cucina di pesce, pizza al forno a legna e tramonti indimenticabili.',
+  url: 'https://www.goenristorante.it',
+  phone: '+39 0364 87229',
+  phoneRaw: '+39036487229',
+  email: 'goenristorantepisogne@gmail.com',
+  piva: '04528650981',
+  address: {
+    street: 'Corso Giuseppe Zanardelli, 15',
+    cap: '25055',
+    city: 'Pisogne',
+    province: 'BS',
+    region: 'Lombardia',
+    country: 'IT',
+    full: 'Corso Giuseppe Zanardelli, 15, 25055 Pisogne (BS)',
+  },
+  social: {
+    instagram: 'https://www.instagram.com/goenristorante/',
+    facebook: 'https://www.facebook.com/GoenRistorantePizzeria',
+  },
+  hours: {
+    label: 'Pranzo e Cena',
+    closed: 'Mercoledì',
+  },
+  since: 2015,
+  seats: 450,
+}

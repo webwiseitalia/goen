@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import logo from '../assets/logogoen-Photoroom.webp'
 
 export default function Footer() {
@@ -25,7 +26,7 @@ export default function Footer() {
         <div className="grid grid-cols-12 gap-y-8 gap-x-4">
           {/* Logo + desc — wider */}
           <div className="col-span-12 md:col-span-4">
-            <img src={logo} alt="Goen" className="h-10 brightness-0 invert mb-4" />
+            <img src={logo} alt="Goen" title="Goen Ristorante Pizzeria" loading="lazy" width={120} height={40} className="h-10 brightness-0 invert mb-4" />
             <p className="text-white/20" style={{ fontSize: '0.78rem', lineHeight: 1.7, maxWidth: '16rem' }}>
               Ristorante, pizzeria e cocktail bar sul porto di Pisogne, Lago d'Iseo.
             </p>
@@ -62,7 +63,11 @@ export default function Footer() {
 
       {/* Bottom bar — asymmetric */}
       <div className="px-6 md:px-16 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3" style={{ borderTop: '1px solid rgba(255,255,255,0.03)' }}>
-        <span className="text-white/10" style={{ fontSize: '0.65rem' }}>© 2025 Goen Ristorante Pizzeria — Pisogne (BS) · P.IVA 04528650981</span>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <span className="text-white/10" style={{ fontSize: '0.65rem' }}>© 2025 Goen Ristorante Pizzeria — Pisogne (BS) · P.IVA 04528650981</span>
+          <Link to="/privacy-policy" onClick={() => window.scrollTo(0, 0)} className="text-white/10 hover:text-white/40 transition-colors" style={{ fontSize: '0.65rem' }}>Privacy Policy</Link>
+          <Link to="/cookie-policy" onClick={() => window.scrollTo(0, 0)} className="text-white/10 hover:text-white/40 transition-colors" style={{ fontSize: '0.65rem' }}>Cookie Policy</Link>
+        </div>
         <a href="#hero" className="label-sm text-white/10 hover:text-white/40 transition-colors">↑</a>
       </div>
     </footer>

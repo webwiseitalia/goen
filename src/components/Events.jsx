@@ -30,11 +30,11 @@ export default function Events() {
   return (
     <section id="eventi" ref={ref} className="relative overflow-hidden" style={{ background: 'var(--white)' }}>
       {/* Diagonal tension — image left 55%, text overlapping from right */}
-      <div className="relative min-h-screen flex items-stretch">
+      <div className="relative md:min-h-screen flex flex-col md:flex-row md:items-stretch">
         {/* Image — not full width, not half, awkward 55% */}
-        <div className="w-full md:w-[55%] flex-shrink-0 relative">
-          <div ref={imgRef} className="h-full min-h-[60vh] md:min-h-full">
-            <img src={interiorImg} alt="Sala Goen per eventi" className="w-full h-full object-cover" />
+        <div className="w-full md:w-[55%] flex-shrink-0 relative order-2 md:order-1">
+          <div ref={imgRef} className="h-[35vh] md:h-full md:min-h-full">
+            <img src={interiorImg} alt="Sala Goen per eventi" title="Sala eventi del Ristorante Goen" loading="lazy" width={960} height={1280} className="w-full h-full object-cover" />
           </div>
           {/* Capacity badge overlapping image edge */}
           <div className="absolute bottom-8 right-0 translate-x-1/2 z-20 py-3 px-6 hidden md:block" style={{ background: 'var(--gold)' }}>
@@ -43,8 +43,8 @@ export default function Events() {
         </div>
 
         {/* Text content — overlaps into image zone on desktop */}
-        <div ref={textRef} className="w-full md:w-[50%] md:ml-[-5%] relative z-10 flex items-center">
-          <div className="px-6 md:px-12 lg:pl-16 lg:pr-20 py-16 md:py-0" style={{ background: 'var(--white)' }}>
+        <div ref={textRef} className="w-full md:w-[50%] md:ml-[-5%] relative z-10 flex items-center order-1 md:order-2">
+          <div className="px-6 md:px-12 lg:pl-16 lg:pr-20 py-12 md:py-0" style={{ background: 'var(--white)' }}>
             <div className="ef">
               <span className="label-sm" style={{ color: 'var(--gold)' }}>Eventi & Cerimonie</span>
             </div>

@@ -17,17 +17,17 @@ gsap.registerPlugin(ScrollTrigger)
 
 // Chaotic layout definitions — each image has unique positioning
 const items = [
-  { src: foto9, alt: 'Vista lago', w: '55%', h: '50vh', ml: '0', mt: '0' },
-  { src: foto6, alt: 'Grigliata pesce', w: '35%', h: '35vh', ml: '60%', mt: '-30vh' },
-  { src: foto3, alt: 'Pasta capesante', w: '40%', h: '45vh', ml: '5%', mt: '-5vh' },
-  { src: foto1, alt: 'Esterno ristorante', w: '30%', h: '30vh', ml: '50%', mt: '-15vh' },
-  { src: foto11, alt: 'Sala camino', w: '45%', h: '55vh', ml: '45%', mt: '2vh' },
-  { src: foto8, alt: 'Calici tramonto', w: '38%', h: '40vh', ml: '2%', mt: '-25vh' },
-  { src: foto7, alt: 'Fritto misto', w: '28%', h: '30vh', ml: '55%', mt: '-10vh' },
-  { src: foto2, alt: 'Dessert', w: '32%', h: '35vh', ml: '10%', mt: '0' },
-  { src: foto10, alt: 'Sala elegante', w: '42%', h: '45vh', ml: '48%', mt: '-20vh' },
-  { src: foto4, alt: 'Fragole', w: '25%', h: '28vh', ml: '3%', mt: '-8vh' },
-  { src: foto5, alt: 'Tortino', w: '30%', h: '32vh', ml: '35%', mt: '-5vh' },
+  { src: foto9, alt: 'Vista lago', w: '58%', h: '58vh', ml: '0', mt: '0' },
+  { src: foto6, alt: 'Grigliata pesce', w: '38%', h: '42vh', ml: '60%', mt: '-30vh' },
+  { src: foto3, alt: 'Pasta capesante', w: '43%', h: '52vh', ml: '5%', mt: '-5vh' },
+  { src: foto1, alt: 'Esterno ristorante', w: '34%', h: '38vh', ml: '50%', mt: '-15vh' },
+  { src: foto11, alt: 'Sala camino', w: '48%', h: '60vh', ml: '45%', mt: '2vh' },
+  { src: foto8, alt: 'Calici tramonto', w: '42%', h: '48vh', ml: '2%', mt: '-25vh' },
+  { src: foto7, alt: 'Fritto misto', w: '32%', h: '38vh', ml: '55%', mt: '-10vh' },
+  { src: foto2, alt: 'Dessert', w: '36%', h: '42vh', ml: '10%', mt: '0' },
+  { src: foto10, alt: 'Sala elegante', w: '45%', h: '52vh', ml: '48%', mt: '-20vh' },
+  { src: foto4, alt: 'Fragole', w: '30%', h: '35vh', ml: '3%', mt: '-8vh' },
+  { src: foto5, alt: 'Tortino', w: '34%', h: '40vh', ml: '35%', mt: '-5vh' },
 ]
 
 export default function Gallery() {
@@ -68,7 +68,7 @@ export default function Gallery() {
               style={{ width: img.w, height: img.h, marginLeft: img.ml, marginTop: img.mt }}
               onClick={() => setLb(img)}
             >
-              <img src={img.src} alt={img.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+              <img src={img.src} alt={img.alt} title={`${img.alt} - Galleria Goen`} loading="lazy" width={800} height={600} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
             </div>
           ))}
         </div>
@@ -84,7 +84,7 @@ export default function Gallery() {
 
       {lb && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 cursor-pointer" style={{ background: 'rgba(10,15,26,0.96)' }} onClick={() => setLb(null)}>
-          <img src={lb.src} alt={lb.alt} className="max-w-full max-h-[85vh] object-contain" />
+          <img src={lb.src} alt={lb.alt} title={lb.alt} width={1200} height={800} className="max-w-full max-h-[85vh] object-contain" />
           <button onClick={() => setLb(null)} className="absolute top-6 right-8 label-sm text-white/40 hover:text-white transition-colors">Chiudi</button>
         </div>
       )}

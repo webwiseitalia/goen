@@ -51,7 +51,7 @@ export default function About() {
         <div className="grid grid-cols-12 gap-4">
           <div className="col-span-12 md:col-span-6 lg:col-span-5 relative" style={{ marginLeft: '-2vw' }}>
             <div className="a-img overflow-hidden" style={{ height: 'clamp(30rem, 60vh, 45rem)' }}>
-              <img src={interiorImg} alt="Sala con camino" className="w-full h-full object-cover" />
+              <img src={interiorImg} alt="Sala con camino" title="Sala interna con camino del Ristorante Goen" loading="lazy" width={800} height={1000} className="w-full h-full object-cover" />
             </div>
             {/* Floating label overlapping image bottom-right */}
             <div className="af absolute -bottom-4 right-4 md:right-8 px-5 py-3 z-10" style={{ background: 'var(--cream)' }}>
@@ -84,7 +84,7 @@ export default function About() {
 
           <div className="col-span-8 col-start-3 md:col-span-3 md:col-start-9 px-6 md:px-0" style={{ marginTop: 'clamp(2rem, 6vw, 8rem)' }}>
             <div className="a-img overflow-hidden aspect-[3/4]">
-              <img src={salaImg} alt="Sala elegante" className="w-full h-full object-cover" />
+              <img src={salaImg} alt="Sala elegante" title="Sala elegante del Ristorante Goen" loading="lazy" width={600} height={800} className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function About() {
         <div className="grid grid-cols-12 gap-4" style={{ marginTop: 'clamp(3rem, 6vw, 8rem)' }}>
           <div className="col-span-5 md:col-span-3 col-start-1 px-6 md:pl-10 md:px-0">
             <div className="a-img overflow-hidden aspect-[4/5]">
-              <img src={buildingImg} alt="Goen dal drone" className="w-full h-full object-cover" />
+              <img src={buildingImg} alt="Goen dal drone" title="Vista aerea del Ristorante Goen a Pisogne" loading="lazy" width={640} height={800} className="w-full h-full object-cover" />
             </div>
           </div>
 

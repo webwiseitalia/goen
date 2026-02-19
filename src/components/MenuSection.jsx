@@ -70,7 +70,7 @@ export default function MenuSection() {
         <div className="relative">
           {/* Image — 65% width from left edge, no padding */}
           <div ref={imgRef} className="w-[85%] md:w-[60%] overflow-hidden" style={{ height: 'clamp(25rem, 50vh, 40rem)' }}>
-            <img src={c.img} alt={c.label} className="w-full h-full object-cover" />
+            <img src={c.img} alt={c.label} title={`Menu ${c.label} - Goen Ristorante`} loading="lazy" width={960} height={640} className="w-full h-full object-cover" />
           </div>
 
           {/* Text panel — overlaps image from right, floating */}

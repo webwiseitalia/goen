@@ -52,7 +52,7 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between px-6 md:px-12 py-5">
           <a href="#hero" className="relative z-10">
-            <img src={logo} alt="Goen" className="h-10 md:h-12 transition-all duration-500" style={{ filter: scrolled ? 'none' : 'brightness(0) invert(1)' }} />
+            <img src={logo} alt="Goen" title="Goen Ristorante Pizzeria" loading="eager" width={120} height={48} className="h-10 md:h-12 transition-all duration-500" style={{ filter: scrolled ? 'none' : 'brightness(0) invert(1)' }} />
           </a>
           <div className="hidden lg:flex items-center gap-10">
             {links.map((l) => (

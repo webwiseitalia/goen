@@ -63,8 +63,8 @@ export default function Location() {
       </div>
 
       {/* Full-bleed image — edge to edge */}
-      <div ref={bigImg} className="mt-12 md:mt-16 w-full overflow-hidden" style={{ height: 'clamp(40vh, 65vh, 80vh)' }}>
-        <img src={terraceImg} alt="Terrazza Goen" className="w-full h-full object-cover" />
+      <div ref={bigImg} className="mt-12 md:mt-16 w-full overflow-hidden" style={{ height: 'clamp(25vh, 45vh, 80vh)' }}>
+        <img src={terraceImg} alt="Terrazza Goen" title="Terrazza panoramica del Ristorante Goen" loading="lazy" width={1920} height={1080} className="w-full h-full object-cover" />
       </div>
 
       {/* Overlapping description band — rises into image */}
@@ -80,13 +80,13 @@ export default function Location() {
       <div className="grid grid-cols-12 gap-4 px-6 md:px-12 lg:px-20 mt-12 md:mt-20">
         <div className="l-img col-span-7 md:col-span-4 md:col-start-2">
           <div className="overflow-hidden" style={{ aspectRatio: '3/4' }}>
-            <img src={lakeImg} alt="Vista lago" className="w-full h-full object-cover" />
+            <img src={lakeImg} alt="Vista lago" title="Vista del Lago d'Iseo da Goen" loading="lazy" width={600} height={800} className="w-full h-full object-cover" />
           </div>
         </div>
 
         <div className="l-img col-span-5 md:col-span-3 md:col-start-7" style={{ marginTop: 'clamp(4rem, 10vw, 12rem)' }}>
           <div className="overflow-hidden" style={{ aspectRatio: '4/5' }}>
-            <img src={interiorImg} alt="Sala interna" className="w-full h-full object-cover" />
+            <img src={interiorImg} alt="Sala interna" title="Sala interna del Ristorante Goen" loading="lazy" width={640} height={800} className="w-full h-full object-cover" />
           </div>
         </div>
 

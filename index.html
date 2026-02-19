@@ -4,12 +4,91 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Goen Ristorante Pizzeria - Ristorante, pizzeria e cocktail bar affacciato sul porto di Pisogne, Lago d'Iseo. Cucina di pesce, pizza al forno a legna e tramonti indimenticabili." />
-    <meta name="keywords" content="ristorante Pisogne, ristorante lago d'iseo, pizzeria vista lago, ristorante pesce Pisogne, location cerimonie lago d'iseo, Goen" />
     <title>Goen Ristorante Pizzeria | Pisogne - Lago d'Iseo</title>
+    <meta name="description" content="Ristorante, pizzeria e cocktail bar sul porto di Pisogne, Lago d'Iseo. Cucina di pesce, pizza al forno a legna e tramonti." />
+    <meta name="keywords" content="ristorante Pisogne, ristorante lago d'iseo, pizzeria vista lago, ristorante pesce Pisogne, location cerimonie lago d'iseo, Goen" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.goenristorante.it/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Goen Ristorante Pizzeria" />
+    <meta property="og:title" content="Goen Ristorante Pizzeria | Pisogne - Lago d'Iseo" />
+    <meta property="og:description" content="Ristorante, pizzeria e cocktail bar sul porto di Pisogne, Lago d'Iseo. Cucina di pesce, pizza al forno a legna e tramonti." />
+    <meta property="og:url" content="https://www.goenristorante.it/" />
+    <meta property="og:image" content="https://www.goenristorante.it/og-image.jpg" />
+    <meta property="og:locale" content="it_IT" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Goen Ristorante Pizzeria | Pisogne - Lago d'Iseo" />
+    <meta name="twitter:description" content="Ristorante, pizzeria e cocktail bar sul porto di Pisogne, Lago d'Iseo. Cucina di pesce, pizza al forno a legna e tramonti." />
+    <meta name="twitter:image" content="https://www.goenristorante.it/og-image.jpg" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Goen Ristorante Pizzeria",
+      "image": "https://www.goenristorante.it/og-image.jpg",
+      "url": "https://www.goenristorante.it",
+      "telephone": "+39 0364 87229",
+      "email": "goenristorantepisogne@gmail.com",
+      "servesCuisine": ["Italiana", "Pesce", "Pizza"],
+      "priceRange": "€€",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Corso Giuseppe Zanardelli, 15",
+        "addressLocality": "Pisogne",
+        "addressRegion": "Lombardia",
+        "postalCode": "25055",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.803,
+        "longitude": 10.107
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "12:00",
+          "closes": "23:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/goenristorante/",
+        "https://www.facebook.com/GoenRistorantePizzeria"
+      ],
+      "hasMenu": {
+        "@type": "Menu",
+        "hasMenuSection": [
+          {
+            "@type": "MenuSection",
+            "name": "Pesce",
+            "description": "Piatti di pesce fresco e specialità del lago"
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Forno a Legna",
+            "description": "Pizza con impasto a lunga lievitazione cotta in forno a legna"
+          },
+          {
+            "@type": "MenuSection",
+            "name": "Terra & Tradizione",
+            "description": "Piatti della tradizione lombarda e bresciana"
+          }
+        ]
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

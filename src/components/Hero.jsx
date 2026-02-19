@@ -32,7 +32,6 @@ export default function Hero() {
         y: '30%', ease: 'none',
         scrollTrigger: { trigger: s.current, start: 'top top', end: 'bottom top', scrub: 1 },
       })
-      // headline drifts up on scroll
       gsap.to(h1.current, {
         y: '-20%', ease: 'none',
         scrollTrigger: { trigger: s.current, start: 'top top', end: 'bottom top', scrub: 1 },
@@ -42,9 +41,9 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="hero" ref={s} className="relative overflow-hidden" style={{ background: 'var(--navy)', height: '110vh' }}>
+    <section id="hero" ref={s} className="relative overflow-hidden" style={{ background: 'var(--navy)', height: '100vh' }}>
       <div className="absolute inset-0 overflow-hidden">
-        <img ref={img} src={heroImg} alt="Vista Lago d'Iseo" className="w-full h-full object-cover will-change-transform" style={{ objectPosition: '50% 30%' }} />
+        <img ref={img} src={heroImg} alt="Vista Lago d'Iseo" title="Vista panoramica del Lago d'Iseo da Goen" loading="eager" width={1920} height={1080} className="w-full h-full object-cover will-change-transform" style={{ objectPosition: '50% 30%' }} />
         <div ref={ov} className="absolute inset-0" style={{ background: 'linear-gradient(160deg, rgba(10,15,26,0.8) 0%, rgba(10,15,26,0.2) 50%, rgba(10,15,26,0.9) 100%)' }} />
       </div>
 
@@ -60,26 +59,25 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* Headline - bottom left, huge, breaking edges */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="pl-6 pr-4 md:pl-16 md:pr-8 pb-[4vh]">
-          <h1 ref={h1} className="display-xxl text-white" style={{ maxWidth: '90vw' }}>
-            <span className="block overflow-hidden">
-              <span className="hw inline-block">Il tuo</span>
-            </span>
-            <span className="block overflow-hidden indent-mid" style={{ paddingBottom: '0.25em' }}>
-              <span className="hw inline-block" style={{ fontStyle: 'italic', color: 'var(--gold)' }}>posto</span>
-            </span>
-            <span className="block overflow-hidden" style={{ paddingBottom: '0.25em' }}>
-              <span className="hw inline-block">sul lago</span>
-            </span>
-          </h1>
-        </div>
+      {/* Content — centered title, bottom bar */}
+      <div ref={h1} className="absolute inset-0 z-10 flex items-center justify-center">
+        <h1 className="text-white text-center" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(5.5rem, 12vw, 10rem)', lineHeight: 0.9, fontWeight: 400, letterSpacing: '-0.04em' }}>
+          <span className="block overflow-hidden" style={{ paddingBottom: '0.15em' }}>
+            <span className="hw inline-block">Il tuo</span>
+          </span>
+          <span className="block overflow-hidden" style={{ paddingBottom: '0.15em' }}>
+            <span className="hw inline-block" style={{ fontStyle: 'italic', color: 'var(--gold)' }}>posto</span>
+          </span>
+          <span className="block overflow-hidden" style={{ paddingBottom: '0.15em' }}>
+            <span className="hw inline-block">sul lago</span>
+          </span>
+        </h1>
+      </div>
 
-        {/* Sub + CTA band - overlaps into next section */}
-        <div className="relative z-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8 px-6 md:px-16 pb-6">
+      <div className="absolute bottom-0 left-0 right-0 z-10 px-6 md:px-16 pb-8 md:pb-10">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div ref={sub} className="max-w-sm">
-            <p style={{ fontSize: 'clamp(0.85rem, 1vw, 1rem)', lineHeight: 1.7, fontWeight: 300, color: 'rgba(255,255,255,0.5)' }}>
+            <p style={{ fontSize: 'clamp(0.85rem, 1vw, 1rem)', lineHeight: 1.7, fontWeight: 300, color: '#fff' }}>
               Ristorante, pizzeria e cocktail bar.<br />
               Cucina di pesce, pizza al forno a legna<br />
               e tramonti che non dimenticherai.
@@ -89,8 +87,8 @@ export default function Hero() {
             <a href="#contatti" className="label-sm px-8 py-4 transition-all duration-500 hover:bg-white hover:text-[var(--navy)]" style={{ background: 'var(--gold)', color: 'var(--navy)' }}>
               Prenota un tavolo
             </a>
-            <a href="#menu" className="label-sm text-white/30 hover:text-white/80 transition-colors duration-500 hidden md:flex items-center gap-3">
-              <span className="w-12 h-px bg-white/20" />Scopri il menu
+            <a href="#menu" className="label-sm text-white hover:text-white/80 transition-colors duration-500 hidden md:flex items-center gap-3">
+              <span className="w-12 h-px bg-white" />Scopri il menu
             </a>
           </div>
         </div>

@@ -13,15 +13,15 @@ export default function Events() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.ef').forEach((el, i) => {
-        gsap.fromTo(el, { y: 40 + i * 5, opacity: 0 }, { y: 0, opacity: 1, duration: 1 + i * 0.05, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } })
+        gsap.fromTo(el, { y: 40 + i * 5, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 + i * 0.03, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } })
       })
       // Image wipe from bottom
       if (imgRef.current) {
-        gsap.fromTo(imgRef.current, { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0 0 0 0)', duration: 1.8, ease: 'expo.inOut', scrollTrigger: { trigger: imgRef.current, start: 'top 70%' } })
+        gsap.fromTo(imgRef.current, { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0 0 0 0)', duration: 0.9, ease: 'expo.inOut', scrollTrigger: { trigger: imgRef.current, start: 'top 70%' } })
       }
       // Text creeps up while scrolling
       if (textRef.current) {
-        gsap.to(textRef.current, { y: '-15%', ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 3 } })
+        gsap.to(textRef.current, { y: '-15%', ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 1.5 } })
       }
     }, ref.current)
     return () => ctx.revert()

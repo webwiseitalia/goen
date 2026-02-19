@@ -13,14 +13,14 @@ export default function CocktailBar() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (imgRef.current) {
-        gsap.to(imgRef.current, { y: '30%', ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 2 } })
+        gsap.to(imgRef.current, { y: '30%', ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 1 } })
       }
       // Horizontal line grows on scroll
       if (lineRef.current) {
-        gsap.fromTo(lineRef.current, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top 60%', end: 'center center', scrub: 1.5 } })
+        gsap.fromTo(lineRef.current, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top 60%', end: 'center center', scrub: 0.8 } })
       }
       gsap.utils.toArray('.cf').forEach((el) => {
-        gsap.fromTo(el, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } })
+        gsap.fromTo(el, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } })
       })
     }, ref.current)
     return () => ctx.revert()

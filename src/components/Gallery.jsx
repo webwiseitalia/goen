@@ -41,7 +41,7 @@ export default function Gallery() {
         const rotStart = (i % 2 === 0 ? 1 : -1) * (0.5 + Math.random())
         gsap.fromTo(el,
           { y: yStart, opacity: 0, rotate: rotStart, scale: 0.92 },
-          { y: 0, opacity: 1, rotate: 0, scale: 1, duration: 1.2 + (i % 3) * 0.15, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } }
+          { y: 0, opacity: 1, rotate: 0, scale: 1, duration: 0.6 + (i % 3) * 0.08, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } }
         )
       })
     }, ref.current)

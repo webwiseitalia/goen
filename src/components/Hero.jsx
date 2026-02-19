@@ -17,25 +17,25 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(img.current, { scale: 1.4 }, { scale: 1, duration: 3, ease: 'expo.out', delay: 0.1 })
-      gsap.fromTo(ov.current, { opacity: 1 }, { opacity: 0.5, duration: 2.5, ease: 'power2.out', delay: 0.2 })
+      gsap.fromTo(img.current, { scale: 1.4 }, { scale: 1, duration: 1.5, ease: 'expo.out', delay: 0.1 })
+      gsap.fromTo(ov.current, { opacity: 1 }, { opacity: 0.5, duration: 1.2, ease: 'power2.out', delay: 0.1 })
 
       const w = h1.current?.querySelectorAll('.hw')
-      if (w) gsap.fromTo(w, { y: '130%', rotate: 3 }, { y: '0%', rotate: 0, duration: 1.6, stagger: 0.1, ease: 'expo.out', delay: 0.6 })
+      if (w) gsap.fromTo(w, { y: '130%', rotate: 3 }, { y: '0%', rotate: 0, duration: 0.8, stagger: 0.07, ease: 'expo.out', delay: 0.3 })
 
-      gsap.fromTo(sub.current, { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 1.4, ease: 'power3.out', delay: 1.6 })
-      gsap.fromTo(cta.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 2.2 })
-      gsap.fromTo(tag.current, { opacity: 0 }, { opacity: 1, duration: 1.5, delay: 2 })
-      gsap.fromTo(bigNum.current, { opacity: 0, x: 50 }, { opacity: 0.06, x: 0, duration: 2, ease: 'power2.out', delay: 1.2 })
+      gsap.fromTo(sub.current, { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: 0.8 })
+      gsap.fromTo(cta.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 1.1 })
+      gsap.fromTo(tag.current, { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 1 })
+      gsap.fromTo(bigNum.current, { opacity: 0, x: 50 }, { opacity: 0.06, x: 0, duration: 1, ease: 'power2.out', delay: 0.6 })
 
       gsap.to(img.current, {
         y: '30%', ease: 'none',
-        scrollTrigger: { trigger: s.current, start: 'top top', end: 'bottom top', scrub: 1.8 },
+        scrollTrigger: { trigger: s.current, start: 'top top', end: 'bottom top', scrub: 1 },
       })
       // headline drifts up on scroll
       gsap.to(h1.current, {
         y: '-20%', ease: 'none',
-        scrollTrigger: { trigger: s.current, start: 'top top', end: 'bottom top', scrub: 2 },
+        scrollTrigger: { trigger: s.current, start: 'top top', end: 'bottom top', scrub: 1 },
       })
     }, s.current)
     return () => ctx.revert()
@@ -67,10 +67,10 @@ export default function Hero() {
             <span className="block overflow-hidden">
               <span className="hw inline-block">Il tuo</span>
             </span>
-            <span className="block overflow-hidden indent-mid">
+            <span className="block overflow-hidden indent-mid" style={{ paddingBottom: '0.25em' }}>
               <span className="hw inline-block" style={{ fontStyle: 'italic', color: 'var(--gold)' }}>posto</span>
             </span>
-            <span className="block overflow-hidden">
+            <span className="block overflow-hidden" style={{ paddingBottom: '0.25em' }}>
               <span className="hw inline-block">sul lago</span>
             </span>
           </h1>

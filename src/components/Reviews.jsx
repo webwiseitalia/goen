@@ -31,7 +31,7 @@ export default function Reviews() {
           { x: 50, y: 40, rotate: 1 },
         ]
         const d = dirs[i % 4]
-        gsap.fromTo(el, { x: d.x, y: d.y, opacity: 0, rotate: d.rotate }, { x: 0, y: 0, opacity: 1, rotate: 0, duration: 1.3 + i * 0.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } })
+        gsap.fromTo(el, { x: d.x, y: d.y, opacity: 0, rotate: d.rotate }, { x: 0, y: 0, opacity: 1, rotate: 0, duration: 0.7 + i * 0.05, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } })
       })
     }, ref.current)
     return () => ctx.revert()

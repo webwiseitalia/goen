@@ -24,7 +24,7 @@ export default function MenuSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.mf').forEach((el) => {
-        gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 87%' } })
+        gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 87%' } })
       })
     }, ref.current)
     return () => ctx.revert()
@@ -32,7 +32,7 @@ export default function MenuSection() {
 
   useEffect(() => {
     if (imgRef.current) {
-      gsap.fromTo(imgRef.current, { scale: 1.15, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, ease: 'power3.out' })
+      gsap.fromTo(imgRef.current, { scale: 1.15, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'power3.out' })
     }
   }, [active])
 
@@ -42,7 +42,7 @@ export default function MenuSection() {
       <div className="overflow-hidden py-5 border-y" style={{ borderColor: 'rgba(255,255,255,0.04)' }}>
         <div className="marquee-track" style={{ animation: 'marquee 40s linear infinite' }}>
           {Array.from({ length: 10 }).map((_, i) => (
-            <span key={i} className="label-sm text-white/8 whitespace-nowrap">
+            <span key={i} className="label-sm text-white whitespace-nowrap">
               Pesce fresco · Forno a legna · Vista Lago · Menu del Giorno €15 · Cocktail Bar · Dal 2015 · 450 Posti&nbsp;&nbsp;&nbsp;
             </span>
           ))}

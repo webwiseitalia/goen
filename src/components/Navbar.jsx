@@ -34,7 +34,7 @@ export default function Navbar() {
     if (!navRef.current) return
     gsap.fromTo(navRef.current.children,
       { y: -30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: 'power3.out', delay: 0.5 }
+      { y: 0, opacity: 1, duration: 0.6, stagger: 0.06, ease: 'power3.out', delay: 0.2 }
     )
   }, [])
 
@@ -76,15 +76,15 @@ export default function Navbar() {
       </nav>
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }} animate={{ clipPath: 'circle(150% at calc(100% - 40px) 40px)' }} exit={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }} transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }} className="fixed inset-0 z-40 flex flex-col justify-end pb-20 px-8" style={{ background: 'var(--cream)' }}>
+          <motion.div initial={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }} animate={{ clipPath: 'circle(150% at calc(100% - 40px) 40px)' }} exit={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }} transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }} className="fixed inset-0 z-40 flex flex-col justify-end pb-20 px-8" style={{ background: 'var(--cream)' }}>
             <div className="space-y-2">
               {links.map((l, i) => (
-                <motion.div key={l.href} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 + i * 0.08, duration: 0.6, ease: [0.76, 0, 0.24, 1] }}>
+                <motion.div key={l.href} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.15 + i * 0.05, duration: 0.4, ease: [0.76, 0, 0.24, 1] }}>
                   <a href={l.href} onClick={() => setOpen(false)} className="block py-2" style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)', fontSize: '2rem' }}>{l.label}</a>
                 </motion.div>
               ))}
             </div>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="mt-12 flex gap-8">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="mt-12 flex gap-8">
               <a href="tel:+39036487229" className="label-sm" style={{ color: 'var(--text-muted)' }}>+39 0364 87229</a>
               <a href="https://www.instagram.com/goenristorante/" target="_blank" rel="noopener noreferrer" className="label-sm" style={{ color: 'var(--text-muted)' }}>Instagram</a>
             </motion.div>

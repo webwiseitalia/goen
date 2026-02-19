@@ -15,35 +15,33 @@ import foto11 from '../assets/foto/foto-11.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const images = [
-  { src: foto9, alt: 'Vista lago', tall: true },
-  { src: foto6, alt: 'Grigliata di pesce', tall: false },
-  { src: foto1, alt: 'Esterno ristorante', tall: false },
-  { src: foto3, alt: 'Pasta con capesante', tall: true },
-  { src: foto8, alt: 'Calici al tramonto', tall: false },
-  { src: foto11, alt: 'Sala con camino', tall: true },
-  { src: foto7, alt: 'Fritto misto', tall: false },
-  { src: foto2, alt: 'Dessert', tall: false },
-  { src: foto10, alt: 'Sala elegante', tall: true },
-  { src: foto4, alt: 'Cialda fragole', tall: false },
-  { src: foto5, alt: 'Tortino cioccolato', tall: false },
+// Chaotic layout definitions — each image has unique positioning
+const items = [
+  { src: foto9, alt: 'Vista lago', w: '55%', h: '50vh', ml: '0', mt: '0' },
+  { src: foto6, alt: 'Grigliata pesce', w: '35%', h: '35vh', ml: '60%', mt: '-30vh' },
+  { src: foto3, alt: 'Pasta capesante', w: '40%', h: '45vh', ml: '5%', mt: '-5vh' },
+  { src: foto1, alt: 'Esterno ristorante', w: '30%', h: '30vh', ml: '50%', mt: '-15vh' },
+  { src: foto11, alt: 'Sala camino', w: '45%', h: '55vh', ml: '45%', mt: '2vh' },
+  { src: foto8, alt: 'Calici tramonto', w: '38%', h: '40vh', ml: '2%', mt: '-25vh' },
+  { src: foto7, alt: 'Fritto misto', w: '28%', h: '30vh', ml: '55%', mt: '-10vh' },
+  { src: foto2, alt: 'Dessert', w: '32%', h: '35vh', ml: '10%', mt: '0' },
+  { src: foto10, alt: 'Sala elegante', w: '42%', h: '45vh', ml: '48%', mt: '-20vh' },
+  { src: foto4, alt: 'Fragole', w: '25%', h: '28vh', ml: '3%', mt: '-8vh' },
+  { src: foto5, alt: 'Tortino', w: '30%', h: '32vh', ml: '35%', mt: '-5vh' },
 ]
 
 export default function Gallery() {
-  const [lightbox, setLightbox] = useState(null)
+  const [lb, setLb] = useState(null)
   const ref = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.utils.toArray('.gal-item').forEach((el, i) => {
+      gsap.utils.toArray('.gi').forEach((el, i) => {
+        const yStart = 40 + (i % 5) * 25
+        const rotStart = (i % 2 === 0 ? 1 : -1) * (0.5 + Math.random())
         gsap.fromTo(el,
-          { y: 60 + (i % 3) * 20, opacity: 0, scale: 0.97 },
-          {
-            y: 0, opacity: 1, scale: 1,
-            duration: 1 + (i % 3) * 0.2,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: el, start: 'top 90%' },
-          }
+          { y: yStart, opacity: 0, rotate: rotStart, scale: 0.92 },
+          { y: 0, opacity: 1, rotate: 0, scale: 1, duration: 1.2 + (i % 3) * 0.15, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } }
         )
       })
     }, ref.current)
@@ -52,59 +50,42 @@ export default function Gallery() {
 
   return (
     <section id="galleria" ref={ref} style={{ background: 'var(--navy)' }}>
-      <div className="px-6 md:px-12 lg:px-20 py-[var(--space-xl)]">
-        {/* Header */}
-        <div className="grid grid-cols-12 mb-12 md:mb-20">
-          <div className="col-span-12 md:col-span-8 md:col-start-5 text-right">
-            <div className="flex items-center gap-4 justify-end mb-4">
-              <span className="label-sm" style={{ color: 'var(--gold)' }}>Galleria</span>
-              <span className="editorial-divider" />
-            </div>
-            <h2 className="display-lg text-white">
-              I nostri <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>scatti</em>
-            </h2>
-          </div>
+      <div style={{ padding: 'var(--space-xl) 0 var(--space-lg)' }}>
+        {/* Header — far left, label + title stacked */}
+        <div className="px-6 md:px-16 mb-12 md:mb-20">
+          <span className="label-sm" style={{ color: 'var(--gold)' }}>Galleria</span>
+          <h2 className="display-lg text-white mt-2">
+            I nostri<br /><em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>scatti</em>
+          </h2>
         </div>
 
-        {/* Irregular masonry - three columns with different heights */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {images.map((img, i) => (
+        {/* Chaotic overlap — each image positioned independently */}
+        <div className="relative px-4 md:px-8">
+          {items.map((img, i) => (
             <div
               key={i}
-              className={`gal-item overflow-hidden cursor-pointer group ${img.tall ? 'row-span-2' : ''}`}
-              onClick={() => setLightbox(img)}
-              style={{ aspectRatio: img.tall ? '3/5' : '4/3' }}
+              className="gi relative overflow-hidden cursor-pointer group"
+              style={{ width: img.w, height: img.h, marginLeft: img.ml, marginTop: img.mt }}
+              onClick={() => setLb(img)}
             >
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
+              <img src={img.src} alt={img.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
             </div>
           ))}
         </div>
 
-        {/* Instagram CTA */}
-        <div className="mt-16 text-center">
-          <a
-            href="https://www.instagram.com/goenristorante/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="label-sm text-white/40 hover:text-white transition-colors duration-300 inline-flex items-center gap-3"
-          >
-            <span className="w-8 h-px bg-white/30" />
-            @goenristorante su Instagram
-            <span className="w-8 h-px bg-white/30" />
+        {/* IG link — asymmetric */}
+        <div className="mt-16 px-6 md:px-16 flex justify-end">
+          <a href="https://www.instagram.com/goenristorante/" target="_blank" rel="noopener noreferrer" className="label-sm text-white/25 hover:text-white/70 transition-colors duration-500 flex items-center gap-3">
+            @goenristorante
+            <span className="w-10 h-px bg-white/20" />
           </a>
         </div>
       </div>
 
-      {/* Lightbox */}
-      {lightbox && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 cursor-pointer" style={{ background: 'rgba(10,15,26,0.95)' }} onClick={() => setLightbox(null)}>
-          <img src={lightbox.src} alt={lightbox.alt} className="max-w-full max-h-[85vh] object-contain" />
-          <button onClick={() => setLightbox(null)} className="absolute top-6 right-6 label-sm text-white/50 hover:text-white transition-colors">Chiudi</button>
+      {lb && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 cursor-pointer" style={{ background: 'rgba(10,15,26,0.96)' }} onClick={() => setLb(null)}>
+          <img src={lb.src} alt={lb.alt} className="max-w-full max-h-[85vh] object-contain" />
+          <button onClick={() => setLb(null)} className="absolute top-6 right-8 label-sm text-white/40 hover:text-white transition-colors">Chiudi</button>
         </div>
       )}
     </section>

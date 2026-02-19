@@ -4,17 +4,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const testimonials = [
-  { text: 'Location eccezionale e vista mozzafiato! Il tramonto dalla terrazza è qualcosa di indimenticabile.', author: 'Marco R.', source: 'Google' },
-  { text: 'Pizza eccellente e ben lievitata, una delle migliori del lago. Pesce fresco e abbondante. Ottimo rapporto qualità-prezzo.', author: 'Laura B.', source: 'TripAdvisor' },
-  { text: 'Personale giovane, cordiale e attento. L\'entrée di benvenuto è un tocco di classe. Ambiente pulito e moderno.', author: 'Giovanni T.', source: 'OpenTable' },
+const quotes = [
+  { text: 'Location eccezionale e vista mozzafiato! Il tramonto dalla terrazza è qualcosa di indimenticabile.', who: 'Marco R.', from: 'Google', size: 'lg' },
+  { text: 'Pizza eccellente e ben lievitata. Pesce fresco e abbondante.', who: 'Laura B.', from: 'TripAdvisor', size: 'sm' },
+  { text: 'Personale giovane, cordiale e attento. L\'entrée di benvenuto è un tocco di classe. Ambiente moderno e curato.', who: 'Giovanni T.', from: 'OpenTable', size: 'md' },
+  { text: 'Ottimo rapporto qualità-prezzo. Ci torneremo.', who: 'Alessia M.', from: 'Google', size: 'sm' },
 ]
 
-const platforms = [
-  { name: 'Google', rating: '4.2', detail: '1.352 recensioni' },
-  { name: 'OpenTable', rating: '4.8', detail: 'Eccellente' },
-  { name: 'TripAdvisor', rating: '3.5', detail: '291 recensioni' },
-  { name: 'Quandoo', rating: '5.9', detail: 'su 10' },
+const ratings = [
+  { name: 'Google', val: '4.2', note: '1.352 recensioni' },
+  { name: 'OpenTable', val: '4.8', note: '' },
+  { name: 'TripAdvisor', val: '3.5', note: '291 recensioni' },
+  { name: 'Quandoo', val: '5.9', note: '/10' },
 ]
 
 export default function Reviews() {
@@ -22,8 +23,15 @@ export default function Reviews() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.utils.toArray('.rev-fade').forEach((el, i) => {
-        gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: i * 0.08, scrollTrigger: { trigger: el, start: 'top 87%' } })
+      gsap.utils.toArray('.rf').forEach((el, i) => {
+        const dirs = [
+          { x: -60, y: 30, rotate: -1 },
+          { x: 40, y: 50, rotate: 0.5 },
+          { x: -30, y: 70, rotate: -0.5 },
+          { x: 50, y: 40, rotate: 1 },
+        ]
+        const d = dirs[i % 4]
+        gsap.fromTo(el, { x: d.x, y: d.y, opacity: 0, rotate: d.rotate }, { x: 0, y: 0, opacity: 1, rotate: 0, duration: 1.3 + i * 0.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } })
       })
     }, ref.current)
     return () => ctx.revert()
@@ -31,48 +39,43 @@ export default function Reviews() {
 
   return (
     <section id="recensioni" ref={ref} style={{ background: 'var(--cream-dark)' }}>
-      <div className="px-6 md:px-12 lg:px-20 py-[var(--space-xl)]">
-        {/* Header */}
-        <div className="grid grid-cols-12 mb-16">
-          <div className="col-span-12 lg:col-span-8">
-            <div className="rev-fade flex items-center gap-4 mb-4">
-              <span className="editorial-divider" />
-              <span className="label-sm" style={{ color: 'var(--gold)' }}>Recensioni</span>
+      <div style={{ padding: 'var(--space-xl) 0' }}>
+        {/* Ratings — spread across width with irregular gaps */}
+        <div className="px-6 md:px-12 lg:px-20 mb-16 md:mb-24">
+          <div className="flex flex-wrap items-end gap-x-8 md:gap-x-16 lg:gap-x-24 gap-y-4">
+            <div className="rf">
+              <span className="label-sm block" style={{ color: 'var(--gold)' }}>Recensioni</span>
+              <h2 className="display-md mt-1" style={{ color: 'var(--navy)' }}>Cosa dicono</h2>
             </div>
-            <h2 className="rev-fade display-lg" style={{ color: 'var(--navy)' }}>
-              Cosa dicono<br />i nostri <em style={{ fontStyle: 'italic', color: 'var(--gold-muted)' }}>ospiti</em>
-            </h2>
+            {ratings.map((r) => (
+              <div key={r.name} className="rf">
+                <span className="label-sm block" style={{ color: 'var(--text-muted)' }}>{r.name}</span>
+                <span className="display-sm block" style={{ color: 'var(--navy)' }}>{r.val}<span style={{ fontSize: '0.6em', color: 'var(--text-muted)' }}>{r.note}</span></span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Ratings - horizontal, irregular spacing */}
-        <div className="rev-fade flex flex-wrap gap-x-12 md:gap-x-20 gap-y-6 mb-20 pb-12 border-b" style={{ borderColor: 'rgba(0,0,0,0.08)' }}>
-          {platforms.map((p) => (
-            <div key={p.name}>
-              <span className="label-sm block" style={{ color: 'var(--text-muted)' }}>{p.name}</span>
-              <span className="display-md block" style={{ color: 'var(--navy)' }}>{p.rating}</span>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{p.detail}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Testimonials - staggered columns, not a grid of cards */}
-        <div className="grid grid-cols-12 gap-8 md:gap-12">
-          {testimonials.map((t, i) => {
-            const colClasses = [
-              'col-span-12 md:col-span-5 md:col-start-1',
-              'col-span-12 md:col-span-5 md:col-start-6 md:mt-16',
-              'col-span-12 md:col-span-5 md:col-start-3 md:mt-8',
+        {/* Quotes — scattered, different sizes, different positions, NO alignment */}
+        <div className="relative px-6 md:px-12 lg:px-20" style={{ minHeight: 'clamp(30rem, 50vh, 50rem)' }}>
+          {quotes.map((q, i) => {
+            const positions = [
+              { left: '0', top: '0', maxW: '28rem', pl: '0' },
+              { left: 'auto', top: '3rem', maxW: '22rem', pl: '55%' },
+              { left: '10%', top: 'auto', maxW: '32rem', pl: '8%' },
+              { left: 'auto', top: 'auto', maxW: '20rem', pl: '60%' },
             ]
+            const p = positions[i]
+            const sizes = { lg: 'clamp(1.3rem, 2.2vw, 1.8rem)', md: 'clamp(1.1rem, 1.6vw, 1.4rem)', sm: 'clamp(0.95rem, 1.2vw, 1.1rem)' }
             return (
-              <div key={i} className={`rev-fade ${colClasses[i]}`}>
+              <div key={i} className="rf mb-12 md:mb-16" style={{ maxWidth: p.maxW, paddingLeft: p.pl }}>
                 <blockquote>
-                  <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)', lineHeight: 1.5, color: 'var(--navy)', fontStyle: 'italic', fontWeight: 400 }}>
-                    "{t.text}"
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: sizes[q.size], lineHeight: 1.4, color: 'var(--navy)', fontStyle: 'italic', fontWeight: 400 }}>
+                    "{q.text}"
                   </p>
-                  <footer className="mt-4 flex items-center gap-3">
-                    <span className="w-6 h-px" style={{ background: 'var(--gold)' }} />
-                    <span className="label-sm" style={{ color: 'var(--text-muted)' }}>{t.author} — {t.source}</span>
+                  <footer className="mt-3 flex items-center gap-3">
+                    <span className="w-5 h-px" style={{ background: 'var(--gold)' }} />
+                    <span className="label-sm" style={{ color: 'var(--text-muted)' }}>{q.who} — {q.from}</span>
                   </footer>
                 </blockquote>
               </div>

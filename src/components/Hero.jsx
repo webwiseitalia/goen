@@ -2,94 +2,99 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import heroImg from '../assets/foto/foto-9.webp'
-import buildingImg from '../assets/foto/foto-1.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
-  const sectionRef = useRef(null)
-  const imgRef = useRef(null)
-  const overlayRef = useRef(null)
-  const headlineRef = useRef(null)
-  const subRef = useRef(null)
-  const ctaRef = useRef(null)
-  const scrollRef = useRef(null)
-  const sideRef = useRef(null)
+  const s = useRef(null)
+  const img = useRef(null)
+  const ov = useRef(null)
+  const h1 = useRef(null)
+  const sub = useRef(null)
+  const cta = useRef(null)
+  const tag = useRef(null)
+  const bigNum = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(imgRef.current, { scale: 1.3 }, { scale: 1, duration: 2.5, ease: 'power3.out', delay: 0.2 })
-      gsap.fromTo(overlayRef.current, { opacity: 1 }, { opacity: 0.55, duration: 2, ease: 'power2.out', delay: 0.3 })
+      gsap.fromTo(img.current, { scale: 1.4 }, { scale: 1, duration: 3, ease: 'expo.out', delay: 0.1 })
+      gsap.fromTo(ov.current, { opacity: 1 }, { opacity: 0.5, duration: 2.5, ease: 'power2.out', delay: 0.2 })
 
-      const words = headlineRef.current?.querySelectorAll('.hw')
-      if (words) {
-        gsap.fromTo(words, { y: '110%', rotateX: -40 }, { y: '0%', rotateX: 0, duration: 1.4, stagger: 0.12, ease: 'power4.out', delay: 0.8 })
-      }
+      const w = h1.current?.querySelectorAll('.hw')
+      if (w) gsap.fromTo(w, { y: '130%', rotate: 3 }, { y: '0%', rotate: 0, duration: 1.6, stagger: 0.1, ease: 'expo.out', delay: 0.6 })
 
-      gsap.fromTo(subRef.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', delay: 1.8 })
-      gsap.fromTo(ctaRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 2.2 })
-      gsap.fromTo(sideRef.current, { clipPath: 'inset(100% 0 0 0)', y: 40 }, { clipPath: 'inset(0% 0 0 0)', y: 0, duration: 1.5, ease: 'power3.inOut', delay: 1.4 })
-      gsap.fromTo(scrollRef.current, { opacity: 0 }, { opacity: 1, duration: 1, delay: 3 })
+      gsap.fromTo(sub.current, { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 1.4, ease: 'power3.out', delay: 1.6 })
+      gsap.fromTo(cta.current, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 2.2 })
+      gsap.fromTo(tag.current, { opacity: 0 }, { opacity: 1, duration: 1.5, delay: 2 })
+      gsap.fromTo(bigNum.current, { opacity: 0, x: 50 }, { opacity: 0.06, x: 0, duration: 2, ease: 'power2.out', delay: 1.2 })
 
-      gsap.to(imgRef.current, {
-        y: '20%', ease: 'none',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom top', scrub: 1.5 },
+      gsap.to(img.current, {
+        y: '30%', ease: 'none',
+        scrollTrigger: { trigger: s.current, start: 'top top', end: 'bottom top', scrub: 1.8 },
       })
-    }, sectionRef.current)
+      // headline drifts up on scroll
+      gsap.to(h1.current, {
+        y: '-20%', ease: 'none',
+        scrollTrigger: { trigger: s.current, start: 'top top', end: 'bottom top', scrub: 2 },
+      })
+    }, s.current)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section id="hero" ref={sectionRef} className="relative min-h-screen overflow-hidden" style={{ background: 'var(--navy)' }}>
+    <section id="hero" ref={s} className="relative overflow-hidden" style={{ background: 'var(--navy)', height: '110vh' }}>
       <div className="absolute inset-0 overflow-hidden">
-        <img ref={imgRef} src={heroImg} alt="Vista Lago d'Iseo" className="w-full h-full object-cover will-change-transform" />
-        <div ref={overlayRef} className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(10,15,26,0.7) 0%, rgba(10,15,26,0.3) 40%, rgba(10,15,26,0.8) 100%)' }} />
+        <img ref={img} src={heroImg} alt="Vista Lago d'Iseo" className="w-full h-full object-cover will-change-transform" style={{ objectPosition: '50% 30%' }} />
+        <div ref={ov} className="absolute inset-0" style={{ background: 'linear-gradient(160deg, rgba(10,15,26,0.8) 0%, rgba(10,15,26,0.2) 50%, rgba(10,15,26,0.9) 100%)' }} />
       </div>
 
-      <div className="relative z-10 min-h-screen flex flex-col justify-end pb-16 md:pb-24">
-        <div className="px-6 md:px-12 lg:px-20">
-          <div className="grid grid-cols-12 gap-4 items-end">
-            <div className="col-span-12 lg:col-span-8">
-              <p className="label-sm mb-6 md:mb-8" style={{ color: 'var(--gold)' }}>Porto di Goen — Pisogne, Lago d'Iseo</p>
-              <h1 ref={headlineRef} className="display-xl text-white" style={{ perspective: '500px' }}>
-                <span className="block overflow-hidden">
-                  <span className="hw inline-block">Il&nbsp;</span>
-                  <span className="hw inline-block">tuo&nbsp;</span>
-                  <span className="hw inline-block" style={{ fontStyle: 'italic', color: 'var(--gold)' }}>posto</span>
-                </span>
-                <span className="block overflow-hidden">
-                  <span className="hw inline-block">sul&nbsp;</span>
-                  <span className="hw inline-block">lago</span>
-                </span>
-              </h1>
-              <div ref={subRef} className="mt-8 md:mt-12 max-w-lg">
-                <p className="text-white/60" style={{ fontSize: 'clamp(0.9rem, 1.1vw, 1.1rem)', lineHeight: 1.7, fontWeight: 300 }}>
-                  Ristorante, pizzeria e cocktail bar. Cucina di pesce, pizza al forno a legna e tramonti che non dimenticherai.
-                </p>
-              </div>
-              <div ref={ctaRef} className="mt-10 flex flex-wrap items-center gap-6">
-                <a href="#contatti" className="label-sm px-8 py-4 transition-all duration-500 hover:bg-white" style={{ background: 'var(--gold)', color: 'var(--navy)' }}>Prenota un tavolo</a>
-                <a href="#menu" className="label-sm text-white/60 hover:text-white transition-colors duration-300 flex items-center gap-3">
-                  <span className="w-8 h-px bg-white/40" />Scopri il menu
-                </a>
-              </div>
-            </div>
-            <div className="hidden lg:block col-span-4 relative">
-              <div ref={sideRef} className="w-full aspect-[3/4] overflow-hidden" style={{ marginBottom: '-4rem' }}>
-                <img src={buildingImg} alt="Ristorante Goen" className="w-full h-full object-cover" />
-              </div>
-              <p className="label-sm text-white/30 mt-6 text-right">Dal 2015</p>
-            </div>
-          </div>
+      {/* Giant decorative number - bleeds right */}
+      <div ref={bigNum} className="absolute top-[15%] right-[-5%] pointer-events-none select-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(10rem, 30vw, 30rem)', lineHeight: 0.8, color: '#fff', opacity: 0.06 }}>
+        '15
+      </div>
+
+      {/* Tag - top left, vertical */}
+      <div ref={tag} className="absolute top-[30%] left-6 md:left-10 opacity-0 hidden md:block">
+        <span className="label-sm text-white/20 block" style={{ writingMode: 'vertical-lr', transform: 'rotate(180deg)' }}>
+          Porto di Goen — Pisogne — Lago d'Iseo
+        </span>
+      </div>
+
+      {/* Headline - bottom left, huge, breaking edges */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="pl-6 pr-4 md:pl-16 md:pr-8 pb-[12vh]">
+          <h1 ref={h1} className="display-xxl text-white" style={{ maxWidth: '90vw' }}>
+            <span className="block overflow-hidden">
+              <span className="hw inline-block">Il tuo</span>
+            </span>
+            <span className="block overflow-hidden indent-mid">
+              <span className="hw inline-block" style={{ fontStyle: 'italic', color: 'var(--gold)' }}>posto</span>
+            </span>
+            <span className="block overflow-hidden">
+              <span className="hw inline-block">sul lago</span>
+            </span>
+          </h1>
         </div>
-        <div ref={scrollRef} className="absolute bottom-8 left-6 md:left-12 flex items-center gap-3 opacity-0">
-          <div className="w-px h-12 bg-white/20 relative overflow-hidden">
-            <div className="w-full h-1/2 bg-white/60 animate-[heroSlide_2s_ease-in-out_infinite]" />
+
+        {/* Sub + CTA band - overlaps into next section */}
+        <div className="relative z-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8 px-6 md:px-16 pb-8" style={{ marginBottom: '-6vh' }}>
+          <div ref={sub} className="max-w-sm">
+            <p style={{ fontSize: 'clamp(0.85rem, 1vw, 1rem)', lineHeight: 1.7, fontWeight: 300, color: 'rgba(255,255,255,0.5)' }}>
+              Ristorante, pizzeria e cocktail bar.<br />
+              Cucina di pesce, pizza al forno a legna<br />
+              e tramonti che non dimenticherai.
+            </p>
           </div>
-          <span className="label-sm text-white/30" style={{ writingMode: 'vertical-lr' }}>Scroll</span>
+          <div ref={cta} className="flex items-center gap-8 flex-shrink-0">
+            <a href="#contatti" className="label-sm px-8 py-4 transition-all duration-500 hover:bg-white hover:text-[var(--navy)]" style={{ background: 'var(--gold)', color: 'var(--navy)' }}>
+              Prenota un tavolo
+            </a>
+            <a href="#menu" className="label-sm text-white/30 hover:text-white/80 transition-colors duration-500 hidden md:flex items-center gap-3">
+              <span className="w-12 h-px bg-white/20" />Scopri il menu
+            </a>
+          </div>
         </div>
       </div>
-      <style>{`@keyframes heroSlide{0%{transform:translateY(-100%)}100%{transform:translateY(200%)}}`}</style>
     </section>
   )
 }
